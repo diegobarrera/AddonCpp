@@ -1,0 +1,22 @@
+{
+  "name": "addoncplusplus",
+  "version": "1.0.0",
+  "description": "C++ Addon for nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nodejs",
+    "c++",
+    "addon"
+  ],
+  "author": "diegobarrera",
+  "license": "MIT",
+  "devDependencies": {
+    "node-gyp": "^4.0.0"
+  },
+  "dependencies": {
+    "node-addon-api": "^1.6.3"
+  }
+}
