@@ -1,22 +1,17 @@
-#include "abstract.h"
+#include <napi.h>
+#include "libraries/functionexample.h"
 
-std::string functionexample::hello(){
-  return "Hello World";
-}
-
-Napi::String functionexample::HelloWrapped(const Napi::CallbackInfo& info) 
+Napi::Object InitAll(Napi::Env env, Napi::Object exports)
 {
-  Napi::Env env = info.Env();
-  Napi::String returnValue = Napi::String::New(env, functionexample::hello());
-  
-  return returnValue;
+  return functionexample::Init(env, exports);
 }
 
-Napi::Object functionexample::Init(Napi::Env env, Napi::Object exports) 
-{
-  exports.Set(
-"hello", Napi::Function::New(env, functionexample::HelloWrapped)
-  );
- 
-  return exports;
-}
+/**
+* This code defines the entry-point for the Node addon, it tells Node where to go
+* once the library has been loaded into active memory. The first argument must
+* match the "target" in our *binding.gyp*. Using NODE_GYP_MODULE_NAME ensures
+* that the argument will be correct, as long as the module is built with
+* node-gyp (which is the usual way of building modules). The second argument
+* points to the function to invoke. The function must not be namespaced.
+*/
+NODE_API_MODULE(testaddon, InitAll)
